@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jonnenauha/prometheus_varnish_exporter.svg?branch=master)](https://travis-ci.com/github/jonnenauha/prometheus_varnish_exporter)
+
 # Varnish exporter for Prometheus
 
 ![Grafana example](dashboards/jonnenauha/dashboard.png)
@@ -13,6 +15,8 @@ The following versions of Varnish have been tested to work: `9.5.0, 9.4.0, 9.3.0
 I won't make any backwards compatibility promises at this point. Your built queries can break on new versions if metric names or labels are refined. If you find bugs or have feature requests feel free to create issues or send PRs.
 
 # Installing and running
+
+You can find the latest binary releases for linux, darwin, windows, freebsd, openbsd and netbsd from the [github releases page](https://github.com/jonnenauha/prometheus_varnish_exporter/releases).
 
 By default the exporter listens on port 9131. See `prometheus_varnish_exporter -h` for available options.
 
@@ -71,7 +75,7 @@ You need go 1.11 or higher, otherwise you can keep using `GOPATH` based developm
 
 ```bash
 # clone
-git clone git@github.com:lyildirimtr/prometheus_varnish_exporter.git
+git clone git@github.com:jonnenauha/prometheus_varnish_exporter.git
 cd prometheus_varnish_exporter
 
 # build binary to current directory
