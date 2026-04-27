@@ -1,8 +1,6 @@
-[![Build Status](https://travis-ci.com/jonnenauha/prometheus_varnish_exporter.svg?branch=master)](https://travis-ci.com/github/jonnenauha/prometheus_varnish_exporter)
-
 # Varnish exporter for Prometheus
 
-![Grafana example](dashboards/jonnenauha/dashboard.png)
+![Grafana example](dashboards/lyildirimtr/dashboard.png)
 
 Scrapes the `varnishstat -j` JSON output on each Prometheus collect and exposes all reported metrics. Metrics with multiple backends or varnish defined identifiers (e.g. `VBE.*.happy SMA.*.c_bytes LCK.*.creat`) and other metrics with similar structure (e.g. `MAIN.fetch_*`) are combined under a single metric name with distinguishable labels. Vanish naming conventions are preserved as much as possible to be familiar to Varnish users when building queries, while at the same time trying to following Prometheus conventions like lower casing and using `_` separators.
 
@@ -10,13 +8,13 @@ Handles runtime Varnish changes like adding new backends via vlc reload. Removed
 
 Advanced users can use `-n -N`, they are passed to `varnishstat`.
 
-I have personally tested the following versions of Varnish to work `6.0.0, 5.2.1, 5.1.2, 4.1.1, 4.1.0, 4.0.3 and 3.0.5`. Missing category groupings in 3.x like `MAIN.` are detected and added automatically for label names to be consistent across versions, assuming of course that the Varnish project does not remove/change the stats.
+The following versions of Varnish have been tested to work: `9.5.0, 9.4.0, 9.3.0, 9.2.0, 9.1.0, 9.0.0, 8.0.0, 7.5.0, 7.4.0, 7.3.0, 7.2.0, 7.1.0, 7.0.0, 6.5.1, 6.0.0, 5.2.1, 5.1.2, 4.1.1, 4.1.0, 4.0.3 and 3.0.5` (*Note: Testing and integration for versions 7.0.0 and above were contributed by @lyildirimtr*). Missing category groupings in 3.x like `MAIN.` are detected and added automatically for label names to be consistent across versions, assuming of course that the Varnish project does not remove/change the stats.
 
 I won't make any backwards compatibility promises at this point. Your built queries can break on new versions if metric names or labels are refined. If you find bugs or have feature requests feel free to create issues or send PRs.
 
 # Installing and running
 
-You can find the latest binary releases for linux, darwin, windows, freebsd, openbsd and netbsd from the [github releases page](https://github.com/jonnenauha/prometheus_varnish_exporter/releases).
+You can find the latest binary releases for linux, darwin, windows, freebsd, openbsd and netbsd from the [github releases page](https://github.com/lyildirimtr/prometheus_varnish_exporter/releases).
 
 By default the exporter listens on port 9131. See `prometheus_varnish_exporter -h` for available options.
 
@@ -30,7 +28,7 @@ To test that `varnishstat` is found on the host machine and to preview all expor
 >
 > 2020/12/18 20:22:33 [FATAL] Startup test: varnishstat scrape failed: exit status 1
 
-User you are executing as can't find or access varnish services. `sudo` is a hammer that works, see for proper solutions [#62](https://github.com/jonnenauha/prometheus_varnish_exporter/issues/62).
+User you are executing as can't find or access varnish services. `sudo` is a hammer that works, see for proper solutions [#62](https://github.com/lyildirimtr/prometheus_varnish_exporter/issues/62).
 
 # Docker
 
@@ -38,11 +36,11 @@ Scraping metrics from Varnish running in a docker container is possible since 1.
 
     prometheus_varnish_exporter -docker-container-name <container_name>
 
-I still don't have a easy, clear and user friendly way of running this exporter in a docker container. For community efforts and solutions see [this issue](https://github.com/jonnenauha/prometheus_varnish_exporter/issues/25#issuecomment-492546458).
+I still don't have a easy, clear and user friendly way of running this exporter in a docker container. For community efforts and solutions see [this issue](https://github.com/lyildirimtr/prometheus_varnish_exporter/issues/25#issuecomment-492546458).
 
 # Grafana dashboards
 
-You can download my dashboard seen in the above picture [here](dashboards/jonnenauha/dashboard.json). I use it at work with our production Varnish instances. I would be interested in your dashboards if you wish to share them or improvement ideas to my current one.
+You can download my dashboard seen in the above picture [here](dashboards/lyildirimtr/dashboard.json). I use it at work with our production Varnish instances. I would be interested in your dashboards if you wish to share them or improvement ideas to my current one.
 
 # Varnish 4 and VCL UUIDs
 
@@ -67,7 +65,7 @@ To aggregate all loaded VCLs into per-backend metric the following Prometheus [r
 
 This repot support go modules so out of `GOPATH` builds are supported. This makes development and buildings easier for go "novices".
 
-You need go 1.11 or higher, otherwise you can keep using `GOPATH` based development ([see old README](https://github.com/jonnenauha/prometheus_varnish_exporter/blob/1.4.1/README.md#build)).
+You need go 1.11 or higher, otherwise you can keep using `GOPATH` based development ([see old README](https://github.com/lyildirimtr/prometheus_varnish_exporter/blob/1.4.1/README.md#build)).
 
 1. [Install latest go](https://golang.org/doc/install) or use OS repos `golang` package.
 
@@ -75,7 +73,7 @@ You need go 1.11 or higher, otherwise you can keep using `GOPATH` based developm
 
 ```bash
 # clone
-git clone git@github.com:jonnenauha/prometheus_varnish_exporter.git
+git clone git@github.com:lyildirimtr/prometheus_varnish_exporter.git
 cd prometheus_varnish_exporter
 
 # build binary to current directory
